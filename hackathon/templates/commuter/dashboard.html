@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Transify{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="card w-full max-w-2xl p-6 rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-center">Welcome, {{ user.username }}!</h2>
+
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-3">Your Transify Profile</h3>
+            <p class="text-lg"><strong>Email:</strong> {{ user.email }}</p>
+            {# Changed to use user_profile context #}
+            <p class="text-lg"><strong>Solana Wallet:</strong> {{ user_profile.solana_wallet_address|default:"Not set"
+                }}</p>
+            <p class="text-lg"><strong>Current Points:</strong> {{ user_profile.current_points }}</p>
+            <p class="text-lg"><strong>Total Tokens Minted:</strong> {{ user_profile.total_tokens_minted }}</p>
+            <p class="text-lg"><strong>Your Referral Code:</strong> {{ user_profile.referral_code|default:"Generate
+                soon!" }}</p>
+        </div>
+
+        <div class="mb-6 border-t pt-4 mt-4">
+            <h3 class="text-xl font-semibold mb-3">Phantom Wallet Connection</h3>
+            <p class="text-base text-gray-700 mb-2">Connect your Phantom wallet to see your Transify Token balance and
+                interact with the blockchain.</p>
+            <button type="button" id="phantom-connect-button" class="btn btn-primary px-4 py-2"
+                style="display:none;">Connect Phantom Wallet</button>
+            <div id="phantom-status" class="text-sm mt-2 text-gray-600">Checking for Phantom Wallet...</div>
+        </div>
+
+        <div class="border-t pt-4 mt-4 text-center">
+            <a href="#" class="btn btn-primary">Scan for Points (Coming Soon!)</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
